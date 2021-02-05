@@ -21,7 +21,7 @@ public class Member {
     private int age;
 
     @JoinColumn(name = "team_id")
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     private Team team;
 
     private Member(String userName, int age, Team team) {
@@ -43,5 +43,12 @@ public class Member {
     public void changeTeam(Team team) {
         this.team = team;
         team.getMembers().add(this);
+    }
+
+    /**
+     * 비즈니스 메서드
+     */
+    public void changeAge(int age) {
+        this.age = age;
     }
 }
