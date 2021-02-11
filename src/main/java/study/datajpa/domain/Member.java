@@ -24,10 +24,20 @@ public class Member {
     @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     private Team team;
 
+    private Member(String userName) {
+        this(userName, 0);
+    }
+
+    private Member(String userName, int age) {
+        this(userName, age, null);
+    }
+
     private Member(String userName, int age, Team team) {
         this.userName = userName;
         this.age = age;
-        this.team = team;
+        if(team != null) {
+            changeTeam(team);
+        }
     }
 
     /**
